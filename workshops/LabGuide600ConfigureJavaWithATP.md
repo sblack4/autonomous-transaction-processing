@@ -129,3 +129,63 @@ Where
 
 ### **STEP 3: Install JDK and JDBC drivers **
 
+This is super easy on linux - Oracle Linux's package manager `yum` provides the JDK and another tool we'll need `wget`
+
+To install the JDK and `wget` you can run this command: 
+```bash
+yum install -y wget java-1.8.0-openjdk
+```
+
+The other dependencies for the app; [Oracle's JDBC](), [Picocli](), and [the app itself] can be downloaded from the project's github repository with the `wget` command. 
+
+```bash
+wget --content-disposition https://github.com/sblack4/ATP-REST-Java/blob/master/ATPJava.tar.gz?raw=true
+wget --content-disposition https://github.com/sblack4/ATP-REST-Java/blob/master/lib.tar.gz?raw=true
+```
+They are both compressed into `.tar.gz` files, to unzip them we can use the `tar` command. 
+```bash
+tar xvzf ATPJava.tar.gz
+tar xvzf lib.tar.gz
+```
+
+All together the commands should be kind of like this. You  can copy and paste this script and run it if you don't feel like copying and pasting there's a quick way to do it which I've included below. 
+
+
+```bash
+# set ARG1
+# to the directory where the app will be installed
+ARG1="$1"
+homedir=~
+eval homedir=${homedir}
+APP_DIR=${ARG1:-"$homedir"}
+
+# get jdk
+yum update && yum install -y java-1.8.0-openjdk.x86_64
+yum install -y java-1.8.0-openjdk.x86_64
+
+# make install folder
+cd ${APP_DIR}
+mkdir ATPJava
+cd ATPJava
+
+# include --content-disposition
+# because otherwise it names file with params (eg ATPJava.tar.gz?raw=true)
+wget --content-disposition https://github.com/sblack4/ATP-REST-Java/blob/master/ATPJava.tar.gz?raw=true
+wget --content-disposition https://github.com/sblack4/ATP-REST-Java/blob/master/lib.tar.gz?raw=true
+
+tar xvzf ATPJava.tar.gz
+tar xvzf lib.tar.gz
+
+# run it
+./run.sh --help
+```
+
+To download and run the installer run the below commands. If you want to put the app in a specific folder then 
+
+```bash
+curl -O https://raw.githubusercontent.com/sblack4/ATP-REST-Java/master/bin/install.sh
+chmod +x install.sh
+# /app/directory is optional
+# defaults to home directory 
+./install.sh [/app/directory]
+```
