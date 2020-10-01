@@ -108,4 +108,4 @@ This workshop walks you through all the steps to get started using the **Oracle 
 
 - Handy docker commands you may need while doing <a href="./LabGuide800BuildingMicroservicesOnATP.md" target="_blank">LabGuide800BuildingMicroservicesOnATP.md</a>
 
-##Thank You
+👍👍
